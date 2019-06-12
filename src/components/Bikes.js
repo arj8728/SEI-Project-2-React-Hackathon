@@ -1,18 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-
 import Map from './Map'
-
 class Bikes extends React.Component {
-
   constructor(props) {
     super(props)
-
     this.state = {
       bikes: []
     }
   }
-
   componentDidMount() {
     // make an AJAX request to get the data to display
     axios.get('https://cors-anywhere.herokuapp.com/https://api.tfl.gov.uk/bikepoint', {
@@ -25,7 +20,6 @@ class Bikes extends React.Component {
       //.then(res => res.json())
       .then(res => this.setState({ bikes: res.data.places }))
   }
-
   render() {
     console.log(this.state.bikes)
     return (
@@ -53,5 +47,4 @@ class Bikes extends React.Component {
     )
   }
 }
-
 export default Bikes

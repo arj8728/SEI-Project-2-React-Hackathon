@@ -14,7 +14,7 @@ class Weather extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/edd734530cf0d4569f24705b5e593c4a/51.509865,-0.118092')
+    axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/5a5b9f42466b4e35a99ce782dc6b92d9/51.509865,-0.118092')
     //.then(res => this.setState({ weather: res.data}))
 
       .then(res => {
@@ -25,7 +25,6 @@ class Weather extends React.Component {
         console.log(presentState.time)
         console.log(presentState.currentWeather)
         console.log(presentState.icon)
-
         this.setState({
           ...presentState
         })

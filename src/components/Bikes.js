@@ -10,7 +10,7 @@ class Bikes extends React.Component {
   }
   componentDidMount() {
     // make an AJAX request to get the data to display
-    axios.get('https://cors-anywhere.herokuapp.com/https://api.tfl.gov.uk/bikepoint', {
+    axios.get('https://api.tfl.gov.uk/bikepoint', {
       params: {
         lat: this.props.location.lat,
         lon: this.props.location.lon,
@@ -22,6 +22,8 @@ class Bikes extends React.Component {
   }
   render() {
     console.log(this.state.bikes)
+    if(!this.state.bikes) return <h1 className= "title"> There are no bike docks near you </h1>
+
     return (
       <div>
         <div className="container">

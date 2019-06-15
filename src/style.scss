@@ -1,0 +1,79 @@
+
+body {
+  text-align: center;
+}
+
+#hero {
+  height: 100vh;
+  background: url('/assets/london.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+
+  h1 {
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+#hero-overlay {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0.1)
+  );
+}
+
+.button {
+  margin-top: 500px;
+}
+
+img {
+  width: 40px;
+}
+
+.map {
+  height: 600px;
+  text-align: justify;
+  padding: 30px 0;
+}
+
+.marker {
+  width: 30px;
+  height: 30px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: -3px 0 10px 0 rgba(0,0,0,0.5);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(50%, 3px);
+  }
+}
+
+#footer {
+  padding: 50px 0;
+}

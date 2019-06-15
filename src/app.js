@@ -27,7 +27,6 @@ class App extends React.Component {
       const { latitude, longitude } = position.coords
       this.setState({ location: { lat: latitude, lon: longitude } })
     })
-
   }
 
   render() {

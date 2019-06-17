@@ -20,14 +20,16 @@ class Bikes extends React.Component {
       //.then(res => res.json())
       .then(res => this.setState({ bikes: res.data.places }))
   }
-  render() {
-    console.log(this.state.bikes)
-    if(!this.state.bikes) return <h1 className= "title"> There are no bike docks near you </h1>
 
+  render() {
+    console.log(this.state.bikes.length, 'bikes')
+    if(this.state.bikes.length === 0) return <h1 className= "title"> There are no bike docks near you </h1>
+    console.log(this.state, 'state')
     return (
       <div>
         <div className="container">
           <h1 className= "title"> Bike docks near you </h1>
+          {this.state.noBikes}
           <div className="columns is-multiline">
             {this.state.bikes.map(bike =>
               <div className="column is-one-third-desktop is-half-tablet" key={bike.commonName}>

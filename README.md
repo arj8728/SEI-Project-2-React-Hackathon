@@ -1,4 +1,4 @@
-# Project 2: Should I cycle in London today? - Front-End Application - React Hackathon - Partner Project
+# Project 2: Should I cycle in London today? - React.js Front-End Application - Partner Project
 
 ### Timeframe
 1.5 days
@@ -97,7 +97,88 @@ ComponentDidMount() {
 
 ### Wins
 
- On the whole we were please with how the site functioned as one page to allow a bike user to make a decision on whether to cycle based on pollution levels and the availability of nearest bikes points. Learning how to consume 3 different API's into one project was a great challenge to overcome and it works nicely on this app. The app also functions well in a mobile view and is responsive. This was our idea to have a one page app fully realised.
+ On the whole we were please with how the site functioned as one page to allow a bike user to make a decision on whether to cycle based on pollution levels and the availability of nearest bikes points. Learning how to consume 3 different API's into one project was a great challenge to overcome and it works nicely on this app.
+
+ For example below is the code in Weather.js for the weather api which I liked. This allowed us to find the exact weather around the user location at this present time which was also displayed above.
+
+ ```JavaScript
+ componentDidMount() {
+   axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/08dea9c8c411e5e0ab2c153501d6a546/51.509865,-0.118092')
+
+     .then(res => {
+       const presentState = {...this.state}
+       presentState.currentWeather = res.data.minutely.summary
+       presentState.time = res.data.minutely.data[0].time
+       presentState.icon = res.data.hourly.data[0].icon
+       console.log(presentState.time)
+       console.log(presentState.currentWeather)
+       console.log(presentState.icon)
+
+       this.setState({
+         ...presentState
+       })
+     })
+ }
+ ```
+
+ We brought in the weather data in the render function
+
+ ```JavaScript
+ <h1 className="title is-1">{(new Date().getHours())}
+   :
+   {(new Date().getMinutes())}</h1>
+ <h2 className="title is-1">{this.state.currentWeather}</h2>
+
+```
+
+Also the weather had been saved to state by:
+
+```JavaScript
+constructor() {
+  super()
+
+  this.state = {
+    weather: []
+  }
+}
+```
+
+Another feature I liked was how we pulled in the air quality data below in the componentDidMount of the Air.js, using cors-anywhere and the TFL api.
+
+```JavaScript
+componentDidMount() {
+  axios.get('https://cors-anywhere.herokuapp.com/https://api.tfl.gov.uk/AirQuality')
+    .then(res => {
+      this.setState({ air: res.data.currentForecast })
+    })
+}
+```
+
+We brought in this current pollution forecast in the render function
+
+```JavaScript
+<div className="columns">
+  {this.state.air.map(airy =>
+    <div className="column" key={airy.forecastID}>
+      <h2> {airy.forecastSummary}</h2>
+      <h2> Nitrogen Dioxide (NO₂) Levels: {airy.nO2Band}</h2>
+    </div>
+```
+
+The air state was saved in the Air.js file as
+
+```JavaScript
+constructor() {
+  super()
+
+  this.state = {
+    air: []
+  }
+}
+```
+
+
+ The app also functions well in a mobile view and is responsive. This was our idea to have a one page app fully realised.
 
  ![IMAGE 4 MOBILE VIEW](https://user-images.githubusercontent.com/43292507/59608850-26eac300-910e-11e9-98f1-b4089efee0a1.png)
 
@@ -105,3 +186,5 @@ ComponentDidMount() {
 ### Future features
 
 We would have liked to implement a 5 day weather forecast with weather icons that changed according to the Dark Sky weather api data. Also to increase the functionality of the map we would allow the user to click on a bike point that displays the information and exact location on the map.
+
+For myself this was a great app that helped to reinforce React.js concepts. As I am someone who learns while writing code I found this the best way to learn React.js. After this spent a great deal of time learning React.js and improving my skills. This project helped me to structure my personal portfolio as a React.js app as seen at _https://arjmodi.co.uk_

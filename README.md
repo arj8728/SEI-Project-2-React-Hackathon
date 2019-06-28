@@ -63,14 +63,31 @@ We then completed the site with by adding in a map of London using Mapbox-gl and
 
 By implementing 'navigator.geolocation.watchPosition' in the componentDidMount of our app.js we were able to correctly get the latitudes and longitudes of the current user and save their location to state which we were then able to pass via props to the Bikes.js component.
 
-
-![image](https://user-images.githubusercontent.com/43292507/59607338-14bb5580-910b-11e9-8672-1fe4deb343c9.png)
+```JavaScript
+componentDidMount() {
+  navigator.geolocation.watchPosition((position) => {
+    const { latitude, longitude } = position.coords
+    this.setState({ location: { lat: latitude, lon: longitude } })
+  })
+}
+```
 
 
 In the Bikes.js component, we used params in the componentDidMount lifecycle hook to locate all of the bike docks within a 500m radius and have these pinpointed on the map.
 
-![image](https://user-images.githubusercontent.com/43292507/59607725-c5c1f000-910b-11e9-9040-9dee56eec3ed.png)
 
+```JavaScript
+ComponentDidMount() {
+  axios.get('https://cors-anywhere.herokuapp.com/https://api.tfl.gov.uk/bikepoint', {
+    params: {
+      lat: this.props.location.lat,
+      lon: this.props.location.lon,
+      radius: 500
+    }
+  })
+    .then(res => this.setState({ bikes: res.data.places }))
+}
+```
 
 
 
